@@ -22,5 +22,6 @@ COPY --from=builder /osiris/dependencies/ ./
 COPY --from=builder /osiris/spring-boot-loader/ ./
 COPY --from=builder /osiris/snapshot-dependencies/ ./
 COPY --from=builder /osiris/application/ ./
+COPY --from=frontend /build/build /app/frontend/build
 EXPOSE 8080
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
