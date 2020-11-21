@@ -1,0 +1,9 @@
+version: "3.2"
+services:
+  osiris:
+    image: docker.lan.cgt.name:5000/osiris:latest
+    build:
+      context: .
+    ports:
+      - target: 8080
+        published: 5100
