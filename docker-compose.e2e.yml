@@ -1,0 +1,18 @@
+version: "3.2"
+services:
+  osiris:
+    build:
+      context: .
+    expose:
+      - 8080
+  cypress:
+    build:
+      context: ./tests
+    depends_on:
+      - osiris
+    environment:
+      - CYPRESS_baseUrl=http://osiris:8080
+    command: npx cypress run
+    volumes:
+      - ./tests/cypress:/tests/cypress
+      - ./tests/cypress.json:/tests/cypress.json

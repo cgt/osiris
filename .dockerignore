@@ -5,3 +5,5 @@
 **/.mvn
 **/target
 **/node_modules
+**/cypress/screenshots
+**/cypress/videos
