@@ -24,4 +24,6 @@ COPY --from=builder /osiris/snapshot-dependencies/ ./
 COPY --from=builder /osiris/application/ ./
 COPY --from=frontend /build/build /app/frontend/build
 EXPOSE 8080
+HEALTHCHECK --interval=10s --start-period=5s \
+    CMD curl --fail http://localhost:8080/actuator/health || exit 1
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
