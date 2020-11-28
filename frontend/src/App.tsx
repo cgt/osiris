@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
     const [message, setMessage] = useState('Awaiting communication with backend');
+    const [todo, setTodo] = useState('');
     useEffect(() => {
         fetch('/api/it-works')
             .then(res => {
@@ -25,7 +26,8 @@ function App() {
                     {message}
                 </p>
 
-                <input type="text" id="new-item" />
+                <input type="text" id="new-item" value={todo} onChange={event => setTodo(event.target.value)} />
+                <div id="todos">{todo}</div>
             </header>
         </div>
     );
