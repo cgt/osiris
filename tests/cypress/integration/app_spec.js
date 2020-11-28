@@ -3,7 +3,7 @@ function addTodo(item) {
 }
 
 function showsInTodoList(item) {
-    // TODO
+    cy.contains("#todos", item);
 }
 
 describe('The app', () => {
