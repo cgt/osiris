@@ -34,6 +34,8 @@ function App() {
                 >
                     Learn React
                 </a>
+
+                <input type="text" id="new-item" />
             </header>
         </div>
     );
