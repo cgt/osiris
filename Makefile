@@ -1,6 +1,6 @@
 SERVER:="docker"
 
-.PHONY: deploy
+.PHONY: deploy e2e
 
 deploy:
 	docker-compose build
