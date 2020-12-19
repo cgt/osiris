@@ -9,8 +9,10 @@ test('renders without crashing', () => {
 describe('SignUpForm', () => {
     it('is empty by default', () => {
         render(<SignUpForm onSubmit={() => {}} />);
-        expect(screen.getByTestId('username-input')).not.toHaveValue();
-        expect(screen.getByTestId('password-input')).not.toHaveValue();
+        expect(screen.getByTestId('sign-up-form')).toHaveFormValues({
+            username: '',
+            password: '',
+        });
     });
     describe('submit button', () => {
         it('is enabled by default', () => {
