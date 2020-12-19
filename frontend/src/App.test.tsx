@@ -15,7 +15,7 @@ describe('SignUpForm', () => {
     describe('submit button', () => {
         it('is enabled by default', () => {
             render(<SignUpForm onSubmit={() => {}} />);
-            expect(screen.getByTestId('sign-up-button')).toBeEnabled();
+            expect(screen.getByRole('button')).toBeEnabled();
         });
     });
 });
