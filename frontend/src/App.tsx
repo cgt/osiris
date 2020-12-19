@@ -21,16 +21,19 @@ interface SignUpParams {
 
 interface SignUpFormState {
     username: string;
+    password: string;
     dirty: boolean;
 }
 
 const initialState: SignUpFormState = {
     username: '',
+    password: '',
     dirty: false,
 };
 
 type SignUpFormAction =
     | { type: 'setUsername', value: string }
+    | { type: 'setPassword', value: string }
     | { type: 'dirty' }
 
 function unreachable(_: never): never {
@@ -41,6 +44,8 @@ function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormSt
     switch (action.type) {
         case 'setUsername':
             return {...state, username: action.value, dirty: true};
+        case 'setPassword':
+            return {...state, password: action.value};
         case 'dirty':
             return {...state, dirty: true};
         default:
@@ -53,7 +58,7 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         dispatch({type: 'dirty'});
         if (state.username !== '') {
-            props.onSignUp({username: state.username, password});
+            props.onSignUp({username: state.username, password: state.password});
         }
         event.preventDefault();
     };
@@ -92,8 +97,8 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
                         data-testid="password-input"
                         name="password"
                         label="Password"
-                        value={password}
-                        onChange={event => setPassword(event.target.value)}
+                        value={state.password}
+                        onChange={event => dispatch({type: 'setPassword', value: event.target.value})}
                     />
                 </Grid>
                 <Grid item xs={12}>
