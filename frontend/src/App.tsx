@@ -14,10 +14,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function SignUpForm() {
+function SignUpForm(props: { onSubmit(): void; }) {
     const classes = useStyles();
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        alert('Form submitted.');
+        props.onSubmit();
         event.preventDefault();
     };
     return <>
@@ -62,12 +62,16 @@ function SignUpForm() {
 }
 
 function App() {
+    const onSignUp = () => {
+        alert('Form submitted.');
+    };
+
     const classes = useStyles();
 
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
-                <SignUpForm />
+                <SignUpForm onSubmit={onSignUp} />
             </div>
         </Container>
     );
