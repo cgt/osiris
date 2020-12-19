@@ -18,14 +18,14 @@ describe('SignUpForm', () => {
     });
     describe('when submitted', () => {
         it('emits onSubmit event with username and password', () => {
-            const onSubmitHandler = jest.fn();
-            render(<SignUpForm onSignUp={onSubmitHandler} />);
+            const handler = jest.fn();
+            render(<SignUpForm onSignUp={handler} />);
 
             userEvent.type(screen.getByLabelText(/username/i), 'entered-username');
             userEvent.type(screen.getByLabelText(/password/i), 'entered-password');
             screen.getByRole('button').click();
 
-            expect(onSubmitHandler).toHaveBeenCalledWith({
+            expect(handler).toHaveBeenCalledWith({
                 username: 'entered-username',
                 password: 'entered-password',
             });
