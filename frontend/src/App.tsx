@@ -22,7 +22,9 @@ interface SignUpParams {
 export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [dirty, setDirty] = useState(false);
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        setDirty(true);
         if (username !== '') {
             props.onSignUp({username, password});
         }
@@ -47,7 +49,7 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
                         label="Username"
                         value={username}
                         onChange={event => setUsername(event.target.value)}
-                        error={username === ''}
+                        error={dirty && username === ''}
                     />
                 </Grid>
                 <Grid item xs={12}>

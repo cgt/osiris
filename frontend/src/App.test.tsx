@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { App, SignUpForm } from './App';
 
@@ -14,6 +14,7 @@ describe('SignUpForm', () => {
             username: '',
             password: '',
         });
+        expect(screen.getByLabelText(/username/i)).toHaveAttribute('aria-invalid', 'false');
         expect(screen.getByRole('button')).toBeEnabled();
     });
     describe('when submitted', () => {
@@ -40,12 +41,14 @@ describe('SignUpForm', () => {
                 expect(handler).not.toHaveBeenCalled();
             });
 
-            it('shows error', () => {
+            it('shows error', async () => {
                 render(<SignUpForm onSignUp={() => {}} />);
 
                 screen.getByRole('button').click();
 
-                expect(screen.getByLabelText(/username/i)).toHaveAttribute('aria-invalid', 'true');
+                await waitFor(() =>
+                    expect(screen.getByLabelText(/username/i)).toHaveAttribute('aria-invalid', 'true')
+                );
             });
         });
     });
