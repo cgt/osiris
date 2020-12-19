@@ -14,12 +14,7 @@ describe('SignUpForm', () => {
             username: '',
             password: '',
         });
-    });
-    describe('submit button', () => {
-        it('is enabled by default', () => {
-            render(<SignUpForm onSubmit={() => {}} />);
-            expect(screen.getByRole('button')).toBeEnabled();
-        });
+        expect(screen.getByRole('button')).toBeEnabled();
     });
     describe('when submitted', () => {
         it('emits onSubmit event with username and password', () => {
