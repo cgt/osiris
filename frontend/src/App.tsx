@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SignUpForm(props: { classes: Record<'paper' | 'form', string> }) {
-    const classes = props.classes;
+    const classes = useStyles();
     return <>
         <Typography component="h1" variant="h5">
             Sign up
