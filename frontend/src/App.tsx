@@ -23,12 +23,14 @@ interface SignUpFormState {
     username: string;
     password: string;
     usernameDirty: boolean;
+    passwordDirty: boolean;
 }
 
 const initialState: SignUpFormState = {
     username: '',
     password: '',
     usernameDirty: false,
+    passwordDirty: false,
 };
 
 type SignUpFormAction =
@@ -47,7 +49,7 @@ function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormSt
         case 'setPassword':
             return {...state, password: action.value};
         case 'dirty':
-            return {...state, usernameDirty: true};
+            return {...state, usernameDirty: true, passwordDirty: true};
         default:
             return unreachable(action);
     }
@@ -98,7 +100,7 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
                         label="Password"
                         value={state.password}
                         onChange={event => dispatch({type: 'setPassword', value: event.target.value})}
-                        error={state.usernameDirty && state.password === ''}
+                        error={state.passwordDirty && state.password === ''}
                     />
                 </Grid>
                 <Grid item xs={12}>
