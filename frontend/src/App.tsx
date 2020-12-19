@@ -33,6 +33,10 @@ type SignUpFormAction =
     | { type: 'setUsername', value: string }
     | { type: 'dirty' }
 
+function unreachable(_: never): never {
+    throw new Error('unreachable');
+}
+
 function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormState {
     switch (action.type) {
         case 'setUsername':
@@ -40,7 +44,7 @@ function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormSt
         case 'dirty':
             return {...state, dirty: true};
         default:
-            throw new Error('unreachable');
+            return unreachable(action);
     }
 }
 
