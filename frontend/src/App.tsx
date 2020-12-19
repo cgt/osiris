@@ -45,9 +45,7 @@ function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormSt
 }
 
 export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
-    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [dirty, setDirty] = useState(false);
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         dispatch({type: 'dirty'});
         if (state.username !== '') {
