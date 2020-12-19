@@ -47,7 +47,7 @@ function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormSt
         case 'setUsername':
             return {...state, username: action.value, usernameDirty: true};
         case 'setPassword':
-            return {...state, password: action.value};
+            return {...state, password: action.value, passwordDirty: true};
         case 'dirty':
             return {...state, usernameDirty: true, passwordDirty: true};
         default:

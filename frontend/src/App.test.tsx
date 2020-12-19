@@ -77,4 +77,18 @@ describe('SignUpForm', () => {
             );
         });
     });
+
+    describe('when password entered and then removed', () => {
+        it('shows error', async () => {
+            render(<SignUpForm onSignUp={() => {}} />);
+
+            const passwordField = screen.getByLabelText(/password/i);
+            userEvent.type(passwordField, 'entered-password');
+            userEvent.clear(passwordField);
+
+            await waitFor(() =>
+                expect(screen.getByLabelText(/password/i)).toHaveAttribute('aria-invalid', 'true')
+            );
+        });
+    });
 });
