@@ -15,11 +15,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SignUpForm(props: { classes: Record<'paper' | 'form', string> }) {
+    const classes = props.classes;
     return <>
         <Typography component="h1" variant="h5">
             Sign up
         </Typography>
-        <form className={props.classes.form} noValidate>
+        <form className={classes.form} noValidate>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TextField
