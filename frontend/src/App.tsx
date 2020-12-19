@@ -1,8 +1,11 @@
 import React from 'react';
+import { Container } from '@material-ui/core';
 
 function App() {
     return (
-        <p>Hello, World!</p>
+        <Container>
+            <p>Hello, World!</p>
+        </Container>
     );
 }
 
