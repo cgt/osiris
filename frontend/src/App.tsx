@@ -98,6 +98,7 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
                         label="Password"
                         value={state.password}
                         onChange={event => dispatch({type: 'setPassword', value: event.target.value})}
+                        error={state.dirty && state.password === ''}
                     />
                 </Grid>
                 <Grid item xs={12}>

@@ -51,6 +51,17 @@ describe('SignUpForm', () => {
                 );
             });
         });
+        describe('given password is empty', () => {
+            it('shows error', async () => {
+                render(<SignUpForm onSignUp={() => {}} />);
+
+                screen.getByRole('button').click();
+
+                await waitFor(() =>
+                    expect(screen.getByLabelText(/password/i)).toHaveAttribute('aria-invalid', 'true')
+                );
+            });
+        });
     });
 
     describe('when username entered and then removed', () => {
