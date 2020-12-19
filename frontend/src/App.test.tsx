@@ -35,6 +35,7 @@ describe('SignUpForm', () => {
             it('does not emit onSignUp', () => {
                 const handler = jest.fn();
                 render(<SignUpForm onSignUp={handler} />);
+                userEvent.type(screen.getByLabelText(/password/i), 'entered-password');
 
                 screen.getByRole('button').click();
 
