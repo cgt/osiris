@@ -47,6 +47,7 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
                         label="Username"
                         value={username}
                         onChange={event => setUsername(event.target.value)}
+                        error={username === ''}
                     />
                 </Grid>
                 <Grid item xs={12}>

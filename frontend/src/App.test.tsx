@@ -39,6 +39,14 @@ describe('SignUpForm', () => {
 
                 expect(handler).not.toHaveBeenCalled();
             });
+
+            it('shows error', () => {
+                render(<SignUpForm onSignUp={() => {}} />);
+
+                screen.getByRole('button').click();
+
+                expect(screen.getByLabelText(/username/i)).toHaveAttribute('aria-invalid', 'true');
+            });
         });
     });
 });
