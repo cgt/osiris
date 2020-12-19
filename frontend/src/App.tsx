@@ -39,6 +39,7 @@ export function SignUpForm(props: { onSubmit(data: SignUpParams): void; }) {
                         fullWidth
                         autoFocus
                         variant="outlined"
+                        id="username-input"
                         data-testid="username-input"
                         name="username"
                         label="Username"
@@ -52,6 +53,7 @@ export function SignUpForm(props: { onSubmit(data: SignUpParams): void; }) {
                         fullWidth
                         variant="outlined"
                         type="password"
+                        id="password-input"
                         data-testid="password-input"
                         name="password"
                         label="Password"
