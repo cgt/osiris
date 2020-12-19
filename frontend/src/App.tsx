@@ -15,13 +15,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SignUpForm(props: { onSubmit(): void; }) {
-    const classes = useStyles();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         props.onSubmit();
         event.preventDefault();
     };
+    const classes = useStyles();
     return <>
         <Typography component="h1" variant="h5">
             Sign up
