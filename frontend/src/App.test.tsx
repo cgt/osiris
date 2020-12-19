@@ -17,7 +17,7 @@ describe('SignUpForm', () => {
         expect(screen.getByRole('button')).toBeEnabled();
     });
     describe('when submitted', () => {
-        it('emits onSubmit event with username and password', () => {
+        it('emits onSignUp event with username and password', () => {
             const handler = jest.fn();
             render(<SignUpForm onSignUp={handler} />);
 
