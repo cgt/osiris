@@ -65,6 +65,7 @@ export function SignUpForm(props: { onSubmit(data: SignUpParams): void; }) {
                         fullWidth
                         variant="contained"
                         color="primary"
+                        data-testid="sign-up-button"
                     >
                         Sign up
                     </Button>

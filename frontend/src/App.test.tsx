@@ -12,4 +12,10 @@ describe('SignUpForm', () => {
         expect(screen.getByTestId('username-input')).not.toHaveValue();
         expect(screen.getByTestId('password-input')).not.toHaveValue();
     });
+    describe('submit button', () => {
+        it('is enabled by default', () => {
+            render(<SignUpForm onSubmit={() => {}} />);
+            expect(screen.getByTestId('sign-up-button')).toBeEnabled();
+        });
+    });
 });
