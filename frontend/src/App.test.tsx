@@ -52,4 +52,18 @@ describe('SignUpForm', () => {
             });
         });
     });
+
+    describe('when username entered and then removed', () => {
+        it('shows error', async () => {
+            render(<SignUpForm onSignUp={() => {}} />);
+
+            const usernameField = screen.getByLabelText(/username/i);
+            userEvent.type(usernameField, 'entered-username');
+            userEvent.clear(usernameField);
+
+            await waitFor(() =>
+                expect(screen.getByLabelText(/username/i)).toHaveAttribute('aria-invalid', 'true')
+            );
+        });
+    });
 });
