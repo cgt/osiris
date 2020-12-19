@@ -14,7 +14,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function SignUpForm(props: { onSubmit(data: { username: string; password: string; }): void; }) {
+interface SignUpParams {
+    username: string;
+    password: string;
+}
+
+function SignUpForm(props: { onSubmit(data: SignUpParams): void; }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -68,7 +73,7 @@ function SignUpForm(props: { onSubmit(data: { username: string; password: string
 }
 
 function App() {
-    const onSignUp = (data: { username: string; password: string; }) => {
+    const onSignUp = (data: SignUpParams) => {
         alert(`Sign up with ${JSON.stringify(data)}`);
     };
 
