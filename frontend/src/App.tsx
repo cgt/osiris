@@ -19,7 +19,7 @@ interface SignUpParams {
     password: string;
 }
 
-function SignUpForm(props: { onSubmit(data: SignUpParams): void; }) {
+export function SignUpForm(props: { onSubmit(data: SignUpParams): void; }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -39,6 +39,7 @@ function SignUpForm(props: { onSubmit(data: SignUpParams): void; }) {
                         fullWidth
                         autoFocus
                         variant="outlined"
+                        data-testid="username-input"
                         name="username"
                         label="Username"
                         value={username}
@@ -51,6 +52,7 @@ function SignUpForm(props: { onSubmit(data: SignUpParams): void; }) {
                         fullWidth
                         variant="outlined"
                         type="password"
+                        data-testid="password-input"
                         name="password"
                         label="Password"
                         value={password}
