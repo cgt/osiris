@@ -77,7 +77,7 @@ export function SignUpForm(props: { onSubmit(data: SignUpParams): void; }) {
     </>;
 }
 
-function App() {
+export function App() {
     const onSignUp = (data: SignUpParams) => {
         alert(`Sign up with ${JSON.stringify(data)}`);
     };
@@ -92,5 +92,3 @@ function App() {
         </Container>
     );
 }
-
-export default App;

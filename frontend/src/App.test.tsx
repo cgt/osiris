@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import App, { SignUpForm } from './App';
+import { App, SignUpForm } from './App';
 
 test('renders without crashing', () => {
     render(<App />);
