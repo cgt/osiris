@@ -14,49 +14,55 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+function SignUpForm(props: { classes: Record<'paper' | 'form', string> }) {
+    return <>
+        <Typography component="h1" variant="h5">
+            Sign up
+        </Typography>
+        <form className={props.classes.form} noValidate>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <TextField
+                        required
+                        fullWidth
+                        autoFocus
+                        variant="outlined"
+                        name="username"
+                        label="Username"
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        required
+                        fullWidth
+                        variant="outlined"
+                        type="password"
+                        name="password"
+                        label="Password"
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                    >
+                        Sign up
+                    </Button>
+                </Grid>
+            </Grid>
+        </form>
+    </>;
+}
+
 function App() {
     const classes = useStyles();
 
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
-                    Sign up
-                </Typography>
-                <form className={classes.form} noValidate>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                required
-                                fullWidth
-                                autoFocus
-                                variant="outlined"
-                                name="username"
-                                label="Username"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                required
-                                fullWidth
-                                variant="outlined"
-                                type="password"
-                                name="password"
-                                label="Password"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                            >
-                                Sign up
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </form>
+                <SignUpForm classes={classes} />
             </div>
         </Container>
     );
