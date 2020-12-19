@@ -23,7 +23,9 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        props.onSignUp({username, password});
+        if (username !== '') {
+            props.onSignUp({username, password});
+        }
         event.preventDefault();
     };
     const classes = useStyles();

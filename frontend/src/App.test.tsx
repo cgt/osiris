@@ -30,5 +30,15 @@ describe('SignUpForm', () => {
                 password: 'entered-password',
             });
         });
+        describe('given username is empty', () => {
+            it('does not emit onSignUp', () => {
+                const handler = jest.fn();
+                render(<SignUpForm onSignUp={handler} />);
+
+                screen.getByRole('button').click();
+
+                expect(handler).not.toHaveBeenCalled();
+            });
+        });
     });
 });
