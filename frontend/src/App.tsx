@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Container, Grid, makeStyles, TextField, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -16,6 +16,8 @@ const useStyles = makeStyles(theme => ({
 
 function SignUpForm(props: { onSubmit(): void; }) {
     const classes = useStyles();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         props.onSubmit();
         event.preventDefault();
@@ -34,6 +36,8 @@ function SignUpForm(props: { onSubmit(): void; }) {
                         variant="outlined"
                         name="username"
                         label="Username"
+                        value={username}
+                        onChange={event => setUsername(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -44,6 +48,8 @@ function SignUpForm(props: { onSubmit(): void; }) {
                         type="password"
                         name="password"
                         label="Password"
+                        value={password}
+                        onChange={event => setPassword(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12}>
