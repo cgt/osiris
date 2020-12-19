@@ -58,7 +58,7 @@ function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormSt
 export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         dispatch({type: 'dirty'});
-        if (state.username !== '') {
+        if (state.username !== '' && state.password !== '') {
             props.onSignUp({username: state.username, password: state.password});
         }
         event.preventDefault();

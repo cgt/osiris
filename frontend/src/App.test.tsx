@@ -52,6 +52,16 @@ describe('SignUpForm', () => {
             });
         });
         describe('given password is empty', () => {
+            it('does not emit onSignUp', () => {
+                const handler = jest.fn();
+                render(<SignUpForm onSignUp={handler} />);
+                userEvent.type(screen.getByLabelText(/username/i), 'entered-username');
+
+                screen.getByRole('button').click();
+
+                expect(handler).not.toHaveBeenCalled();
+            });
+
             it('shows error', async () => {
                 render(<SignUpForm onSignUp={() => {}} />);
 
