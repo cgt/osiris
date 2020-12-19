@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function SignUpForm(props: { classes: Record<'paper' | 'form', string> }) {
+function SignUpForm() {
     const classes = useStyles();
     return <>
         <Typography component="h1" variant="h5">
@@ -63,7 +63,7 @@ function App() {
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
-                <SignUpForm classes={classes} />
+                <SignUpForm />
             </div>
         </Container>
     );
