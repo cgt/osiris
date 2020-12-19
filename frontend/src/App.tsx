@@ -14,11 +14,11 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function SignUpForm(props: { onSubmit(): void; }) {
+function SignUpForm(props: { onSubmit(data: { username: string; password: string; }): void; }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        props.onSubmit();
+        props.onSubmit({username, password});
         event.preventDefault();
     };
     const classes = useStyles();
@@ -68,8 +68,8 @@ function SignUpForm(props: { onSubmit(): void; }) {
 }
 
 function App() {
-    const onSignUp = () => {
-        alert('Form submitted.');
+    const onSignUp = (data: { username: string; password: string; }) => {
+        alert(`Sign up with ${JSON.stringify(data)}`);
     };
 
     const classes = useStyles();
