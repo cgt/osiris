@@ -22,13 +22,13 @@ interface SignUpParams {
 interface SignUpFormState {
     username: string;
     password: string;
-    dirty: boolean;
+    usernameDirty: boolean;
 }
 
 const initialState: SignUpFormState = {
     username: '',
     password: '',
-    dirty: false,
+    usernameDirty: false,
 };
 
 type SignUpFormAction =
@@ -43,11 +43,11 @@ function unreachable(_: never): never {
 function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormState {
     switch (action.type) {
         case 'setUsername':
-            return {...state, username: action.value, dirty: true};
+            return {...state, username: action.value, usernameDirty: true};
         case 'setPassword':
             return {...state, password: action.value};
         case 'dirty':
-            return {...state, dirty: true};
+            return {...state, usernameDirty: true};
         default:
             return unreachable(action);
     }
@@ -83,7 +83,7 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
                         onChange={event => {
                             dispatch({type: 'setUsername', value: event.target.value});
                         }}
-                        error={state.dirty && state.username === ''}
+                        error={state.usernameDirty && state.username === ''}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -98,7 +98,7 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
                         label="Password"
                         value={state.password}
                         onChange={event => dispatch({type: 'setPassword', value: event.target.value})}
-                        error={state.dirty && state.password === ''}
+                        error={state.usernameDirty && state.password === ''}
                     />
                 </Grid>
                 <Grid item xs={12}>
