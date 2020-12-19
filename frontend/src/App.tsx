@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Button, Container, Grid, makeStyles, TextField, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -19,17 +19,43 @@ interface SignUpParams {
     password: string;
 }
 
+interface SignUpFormState {
+    username: string;
+    dirty: boolean;
+}
+
+const initialState: SignUpFormState = {
+    username: '',
+    dirty: false,
+};
+
+type SignUpFormAction =
+    | { type: 'setUsername', value: string }
+    | { type: 'dirty' }
+
+function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormState {
+    switch (action.type) {
+        case 'setUsername':
+            return {...state, username: action.value, dirty: true};
+        case 'dirty':
+            return {...state, dirty: true};
+        default:
+            throw new Error('unreachable');
+    }
+}
+
 export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [dirty, setDirty] = useState(false);
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        setDirty(true);
-        if (username !== '') {
-            props.onSignUp({username, password});
+        dispatch({type: 'dirty'});
+        if (state.username !== '') {
+            props.onSignUp({username: state.username, password});
         }
         event.preventDefault();
     };
+    const [state, dispatch] = useReducer(reducer, initialState);
     const classes = useStyles();
     return <>
         <Typography component="h1" variant="h5">
@@ -47,12 +73,11 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
                         data-testid="username-input"
                         name="username"
                         label="Username"
-                        value={username}
+                        value={state.username}
                         onChange={event => {
-                            setUsername(event.target.value);
-                            setDirty(true);
+                            dispatch({type: 'setUsername', value: event.target.value});
                         }}
-                        error={dirty && username === ''}
+                        error={state.dirty && state.username === ''}
                     />
                 </Grid>
                 <Grid item xs={12}>
