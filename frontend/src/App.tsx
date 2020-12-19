@@ -19,11 +19,11 @@ interface SignUpParams {
     password: string;
 }
 
-export function SignUpForm(props: { onSubmit(data: SignUpParams): void; }) {
+export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        props.onSubmit({username, password});
+        props.onSignUp({username, password});
         event.preventDefault();
     };
     const classes = useStyles();
@@ -87,7 +87,7 @@ export function App() {
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
-                <SignUpForm onSubmit={onSignUp} />
+                <SignUpForm onSignUp={onSignUp} />
             </div>
         </Container>
     );

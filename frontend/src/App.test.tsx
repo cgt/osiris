@@ -9,7 +9,7 @@ test('renders without crashing', () => {
 
 describe('SignUpForm', () => {
     it('is empty by default', () => {
-        render(<SignUpForm onSubmit={() => {}} />);
+        render(<SignUpForm onSignUp={() => {}} />);
         expect(screen.getByTestId('sign-up-form')).toHaveFormValues({
             username: '',
             password: '',
@@ -19,7 +19,7 @@ describe('SignUpForm', () => {
     describe('when submitted', () => {
         it('emits onSubmit event with username and password', () => {
             const onSubmitHandler = jest.fn();
-            render(<SignUpForm onSubmit={onSubmitHandler} />);
+            render(<SignUpForm onSignUp={onSubmitHandler} />);
 
             userEvent.type(screen.getByLabelText(/username/i), 'entered-username');
             userEvent.type(screen.getByLabelText(/password/i), 'entered-password');
