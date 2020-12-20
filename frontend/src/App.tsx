@@ -1,4 +1,5 @@
 import React, { useReducer, useState } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Button, Container, Grid, makeStyles, TextField, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -140,5 +141,13 @@ export function Main() {
 }
 
 export function App() {
-    return <Main />;
+    return (
+        <BrowserRouter>
+            <Switch>
+                <Route path="/">
+                    <Main />
+                </Route>
+            </Switch>
+        </BrowserRouter>
+    );
 }
