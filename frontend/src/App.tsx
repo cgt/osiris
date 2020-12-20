@@ -121,7 +121,7 @@ interface User {
     username: string;
 }
 
-export function App() {
+export function Main() {
     const [user, setUser] = useState<User | undefined>(undefined);
     const onSignUp = (data: SignUpParams) => {
         setUser({username: data.username});
@@ -140,5 +140,5 @@ export function App() {
 }
 
 export function NewApp() {
-    return <App />;
+    return <Main />;
 }

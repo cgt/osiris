@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { App, SignUpForm } from './App';
+import { Main, SignUpForm } from './App';
 
 test('renders without crashing', () => {
-    render(<App />);
+    render(<Main />);
 });
 
 describe('SignUpForm', () => {
