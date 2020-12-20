@@ -128,26 +128,25 @@ export function Main() {
         setUser({username: data.username});
     };
 
-    const classes = useStyles();
-
-    return (
-        <Container component="main" maxWidth="xs">
-            <div className={classes.paper}>
-                {user === undefined && <SignUpForm onSignUp={onSignUp} />}
-                {user !== undefined && <p>Welcome, {user.username}!</p>}
-            </div>
-        </Container>
-    );
+    return <>
+        {user === undefined && <SignUpForm onSignUp={onSignUp} />}
+        {user !== undefined && <p>Welcome, {user.username}!</p>}
+    </>;
 }
 
 export function App() {
+    const classes = useStyles();
     return (
         <BrowserRouter>
-            <Switch>
-                <Route path="/">
-                    <Main />
-                </Route>
-            </Switch>
+            <Container component="main" maxWidth="xs">
+                <div className={classes.paper}>
+                    <Switch>
+                        <Route path="/">
+                            <Main />
+                        </Route>
+                    </Switch>
+                </div>
+            </Container>
         </BrowserRouter>
     );
 }
