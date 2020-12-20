@@ -82,9 +82,7 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
                         name="username"
                         label="Username"
                         value={state.username}
-                        onChange={event => {
-                            dispatch({type: 'setUsername', value: event.target.value});
-                        }}
+                        onChange={event => dispatch({type: 'setUsername', value: event.target.value})}
                         error={state.usernameDirty && state.username === ''}
                     />
                 </Grid>
