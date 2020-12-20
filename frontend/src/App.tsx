@@ -138,3 +138,7 @@ export function App() {
         </Container>
     );
 }
+
+export function NewApp() {
+    return <App />;
+}
