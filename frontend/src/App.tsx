@@ -139,6 +139,6 @@ export function Main() {
     );
 }
 
-export function NewApp() {
+export function App() {
     return <Main />;
 }
