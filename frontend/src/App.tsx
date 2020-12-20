@@ -117,10 +117,14 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
     </>;
 }
 
+interface User {
+    username: string;
+}
+
 export function App() {
-    const [username, setUsername] = useState<string | undefined>(undefined);
+    const [user, setUser] = useState<User | undefined>(undefined);
     const onSignUp = (data: SignUpParams) => {
-        setUsername(data.username);
+        setUser({username: data.username});
     };
 
     const classes = useStyles();
@@ -128,8 +132,8 @@ export function App() {
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
-                {username === undefined && <SignUpForm onSignUp={onSignUp} />}
-                {username !== undefined && <p>Welcome, {username}!</p>}
+                {user === undefined && <SignUpForm onSignUp={onSignUp} />}
+                {user !== undefined && <p>Welcome, {user.username}!</p>}
             </div>
         </Container>
     );
