@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Button, Container, Grid, makeStyles, TextField, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -118,8 +118,9 @@ export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
 }
 
 export function App() {
+    const [username, setUsername] = useState<string | undefined>(undefined);
     const onSignUp = (data: SignUpParams) => {
-        alert(`Sign up with ${JSON.stringify(data)}`);
+        setUsername(data.username);
     };
 
     const classes = useStyles();
@@ -127,7 +128,8 @@ export function App() {
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
-                <SignUpForm onSignUp={onSignUp} />
+                {username === undefined && <SignUpForm onSignUp={onSignUp} />}
+                {username !== undefined && <p>Welcome, {username}!</p>}
             </div>
         </Container>
     );
