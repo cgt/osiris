@@ -108,7 +108,6 @@ export function LoginForm(props: { onLogin(data: LoginParams): void; }) {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        data-testid="sign-up-button"
                     >
                         Sign up
                     </Button>
