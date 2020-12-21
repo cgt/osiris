@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { App, SignUpForm } from './App';
+import { App, LoginForm } from './App';
 
 test('renders without crashing', () => {
     render(<App />);
@@ -9,7 +9,7 @@ test('renders without crashing', () => {
 
 describe('SignUpForm', () => {
     it('is empty by default', () => {
-        render(<SignUpForm onSignUp={() => {}} />);
+        render(<LoginForm onSignUp={() => {}} />);
         expect(screen.getByTestId('sign-up-form')).toHaveFormValues({
             username: '',
             password: '',
@@ -20,7 +20,7 @@ describe('SignUpForm', () => {
     describe('when submitted', () => {
         it('emits onSignUp event with username and password', () => {
             const handler = jest.fn();
-            render(<SignUpForm onSignUp={handler} />);
+            render(<LoginForm onSignUp={handler} />);
 
             userEvent.type(screen.getByLabelText(/username/i), 'entered-username');
             userEvent.type(screen.getByLabelText(/password/i), 'entered-password');
@@ -34,7 +34,7 @@ describe('SignUpForm', () => {
         describe('given username is empty', () => {
             it('does not emit onSignUp', () => {
                 const handler = jest.fn();
-                render(<SignUpForm onSignUp={handler} />);
+                render(<LoginForm onSignUp={handler} />);
                 userEvent.type(screen.getByLabelText(/password/i), 'entered-password');
 
                 screen.getByRole('button').click();
@@ -43,7 +43,7 @@ describe('SignUpForm', () => {
             });
 
             it('shows error', async () => {
-                render(<SignUpForm onSignUp={() => {}} />);
+                render(<LoginForm onSignUp={() => {}} />);
 
                 screen.getByRole('button').click();
 
@@ -55,7 +55,7 @@ describe('SignUpForm', () => {
         describe('given password is empty', () => {
             it('does not emit onSignUp', () => {
                 const handler = jest.fn();
-                render(<SignUpForm onSignUp={handler} />);
+                render(<LoginForm onSignUp={handler} />);
                 userEvent.type(screen.getByLabelText(/username/i), 'entered-username');
 
                 screen.getByRole('button').click();
@@ -64,7 +64,7 @@ describe('SignUpForm', () => {
             });
 
             it('shows error', async () => {
-                render(<SignUpForm onSignUp={() => {}} />);
+                render(<LoginForm onSignUp={() => {}} />);
 
                 screen.getByRole('button').click();
 
@@ -77,7 +77,7 @@ describe('SignUpForm', () => {
 
     describe('when username entered and then removed', () => {
         it('shows error', async () => {
-            render(<SignUpForm onSignUp={() => {}} />);
+            render(<LoginForm onSignUp={() => {}} />);
 
             const usernameField = screen.getByLabelText(/username/i);
             userEvent.type(usernameField, 'entered-username');
@@ -91,7 +91,7 @@ describe('SignUpForm', () => {
 
     describe('when password entered and then removed', () => {
         it('shows error', async () => {
-            render(<SignUpForm onSignUp={() => {}} />);
+            render(<LoginForm onSignUp={() => {}} />);
 
             const passwordField = screen.getByLabelText(/password/i);
             userEvent.type(passwordField, 'entered-password');

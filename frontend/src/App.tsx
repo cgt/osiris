@@ -56,7 +56,7 @@ function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormSt
     }
 }
 
-export function SignUpForm(props: { onSignUp(data: SignUpParams): void; }) {
+export function LoginForm(props: { onSignUp(data: SignUpParams): void; }) {
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch({type: 'dirty'});
@@ -136,7 +136,7 @@ export function App() {
                         <Route path="/">
                             {
                                 user === undefined
-                                    ? <SignUpForm onSignUp={onSignUp} />
+                                    ? <LoginForm onSignUp={onSignUp} />
                                     : <p>Welcome, {user.username}!</p>
                             }
                         </Route>
