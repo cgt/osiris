@@ -20,14 +20,14 @@ interface LoginParams {
     password: string;
 }
 
-interface SignUpFormState {
+interface LoginFormState {
     username: string;
     password: string;
     usernameDirty: boolean;
     passwordDirty: boolean;
 }
 
-const initialState: SignUpFormState = {
+const initialState: LoginFormState = {
     username: '',
     password: '',
     usernameDirty: false,
@@ -43,7 +43,7 @@ function unreachable(_: never): never {
     throw new Error('unreachable');
 }
 
-function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormState {
+function reducer(state: LoginFormState, action: SignUpFormAction): LoginFormState {
     switch (action.type) {
         case 'setUsername':
             return {...state, username: action.value, usernameDirty: true};
