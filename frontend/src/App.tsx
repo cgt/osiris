@@ -123,7 +123,7 @@ interface User {
 
 export function App() {
     const [user, setUser] = useState<User | undefined>(undefined);
-    const onSignUp = (data: LoginParams) => {
+    const onLogin = (data: LoginParams) => {
         setUser({username: data.username});
     };
     const classes = useStyles();
@@ -135,7 +135,7 @@ export function App() {
                         <Route path="/">
                             {
                                 user === undefined
-                                    ? <LoginForm onLogin={onSignUp} />
+                                    ? <LoginForm onLogin={onLogin} />
                                     : <p>Welcome, {user.username}!</p>
                             }
                         </Route>
