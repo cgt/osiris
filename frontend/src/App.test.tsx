@@ -10,7 +10,7 @@ test('renders without crashing', () => {
 describe('SignUpForm', () => {
     it('is empty by default', () => {
         render(<LoginForm onLogin={() => {}} />);
-        expect(screen.getByTestId('sign-up-form')).toHaveFormValues({
+        expect(screen.getByTestId('login-form')).toHaveFormValues({
             username: '',
             password: '',
         });

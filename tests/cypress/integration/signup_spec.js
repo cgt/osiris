@@ -27,7 +27,7 @@ function enterPassword(password) {
 }
 
 function submit() {
-    getByTestId('sign-up-form').submit();
+    getByTestId('login-form').submit();
 }
 
 function showsUserIsRegistered() {
