@@ -1,6 +1,6 @@
 SERVER:="docker"
 
-.PHONY: deploy e2e
+.PHONY: deploy e2e dev
 
 deploy:
 	docker-compose build
@@ -10,3 +10,6 @@ deploy:
 
 e2e:
 	docker-compose -f docker-compose.e2e.yml up --build --abort-on-container-exit --exit-code-from cypress
+
+dev:
+	CYPRESS_baseUrl="http://localhost:3000" npm run cypress:open
