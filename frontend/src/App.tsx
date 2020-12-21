@@ -34,7 +34,7 @@ const initialState: LoginFormState = {
     passwordDirty: false,
 };
 
-type SignUpFormAction =
+type LoginFormAction =
     | { type: 'setUsername', value: string }
     | { type: 'setPassword', value: string }
     | { type: 'dirty' }
@@ -43,7 +43,7 @@ function unreachable(_: never): never {
     throw new Error('unreachable');
 }
 
-function reducer(state: LoginFormState, action: SignUpFormAction): LoginFormState {
+function reducer(state: LoginFormState, action: LoginFormAction): LoginFormState {
     switch (action.type) {
         case 'setUsername':
             return {...state, username: action.value, usernameDirty: true};
