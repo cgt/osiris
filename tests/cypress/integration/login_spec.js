@@ -1,16 +1,16 @@
-describe('Sign up', () => {
+describe('Login', () => {
     it('works', () => {
         cy.visit('/');
 
-        enterValidAndAvailableUsername();
+        enterValidUsername();
         enterValidPassword();
         submit();
 
-        showsUserIsRegistered();
+        showsUserIsLoggedIn();
     });
 });
 
-function enterValidAndAvailableUsername() {
+function enterValidUsername() {
     enterUsername(USERNAME);
 }
 
@@ -30,7 +30,7 @@ function submit() {
     getByTestId('login-form').submit();
 }
 
-function showsUserIsRegistered() {
+function showsUserIsLoggedIn() {
     cy.contains(`Welcome, ${USERNAME}!`);
 }
 
