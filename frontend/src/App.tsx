@@ -120,8 +120,19 @@ interface User {
 
 export function App() {
     const [user, setUser] = useState<User | undefined>(undefined);
-    const onLogin = (data: LoginParams) => {
-        setUser({username: data.username});
+    const onLogin = async (data: LoginParams) => {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        });
+        if (response.status === 204) {
+            setUser({username: data.username});
+        } else {
+            alert(`Something evil happened: ${response.status} ${response.statusText}`);
+        }
     };
     const classes = useStyles();
     return (
