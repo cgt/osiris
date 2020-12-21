@@ -56,12 +56,12 @@ function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormSt
     }
 }
 
-export function LoginForm(props: { onSignUp(data: SignUpParams): void; }) {
+export function LoginForm(props: { onLogin(data: SignUpParams): void; }) {
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch({type: 'dirty'});
         if (state.username !== '' && state.password !== '') {
-            props.onSignUp({username: state.username, password: state.password});
+            props.onLogin({username: state.username, password: state.password});
         }
     };
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -136,7 +136,7 @@ export function App() {
                         <Route path="/">
                             {
                                 user === undefined
-                                    ? <LoginForm onSignUp={onSignUp} />
+                                    ? <LoginForm onLogin={onSignUp} />
                                     : <p>Welcome, {user.username}!</p>
                             }
                         </Route>
