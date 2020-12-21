@@ -122,19 +122,11 @@ interface User {
     username: string;
 }
 
-export function Main() {
+export function App() {
     const [user, setUser] = useState<User | undefined>(undefined);
     const onSignUp = (data: SignUpParams) => {
         setUser({username: data.username});
     };
-
-    return <>
-        {user === undefined && <SignUpForm onSignUp={onSignUp} />}
-        {user !== undefined && <p>Welcome, {user.username}!</p>}
-    </>;
-}
-
-export function App() {
     const classes = useStyles();
     return (
         <BrowserRouter>
@@ -142,7 +134,11 @@ export function App() {
                 <div className={classes.paper}>
                     <Switch>
                         <Route path="/">
-                            <Main />
+                            {
+                                user === undefined
+                                    ? <SignUpForm onSignUp={onSignUp} />
+                                    : <p>Welcome, {user.username}!</p>
+                            }
                         </Route>
                     </Switch>
                 </div>
