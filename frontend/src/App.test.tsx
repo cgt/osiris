@@ -7,7 +7,7 @@ test('renders without crashing', () => {
     render(<App />);
 });
 
-describe('SignUpForm', () => {
+describe('LoginForm', () => {
     it('is empty by default', () => {
         render(<LoginForm onLogin={() => {}} />);
         expect(screen.getByTestId('login-form')).toHaveFormValues({
@@ -18,7 +18,7 @@ describe('SignUpForm', () => {
         expect(screen.getByRole('button')).toBeEnabled();
     });
     describe('when submitted', () => {
-        it('emits onSignUp event with username and password', () => {
+        it('emits event with username and password', () => {
             const handler = jest.fn();
             render(<LoginForm onLogin={handler} />);
 
@@ -32,7 +32,7 @@ describe('SignUpForm', () => {
             });
         });
         describe('given username is empty', () => {
-            it('does not emit onSignUp', () => {
+            it('does not emit login event', () => {
                 const handler = jest.fn();
                 render(<LoginForm onLogin={handler} />);
                 userEvent.type(screen.getByLabelText(/password/i), 'entered-password');
@@ -53,7 +53,7 @@ describe('SignUpForm', () => {
             });
         });
         describe('given password is empty', () => {
-            it('does not emit onSignUp', () => {
+            it('does not emit login event', () => {
                 const handler = jest.fn();
                 render(<LoginForm onLogin={handler} />);
                 userEvent.type(screen.getByLabelText(/username/i), 'entered-username');
