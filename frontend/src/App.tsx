@@ -27,7 +27,7 @@ interface LoginFormState {
     passwordDirty: boolean;
 }
 
-const initialState: LoginFormState = {
+const initialLoginFormState: LoginFormState = {
     username: '',
     password: '',
     usernameDirty: false,
@@ -64,7 +64,7 @@ export function LoginForm(props: { onLogin(data: LoginParams): void; }) {
             props.onLogin({username: state.username, password: state.password});
         }
     };
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(reducer, initialLoginFormState);
     const classes = useStyles();
     return <>
         <form className={classes.form} noValidate onSubmit={handleOnSubmit} data-testid="login-form">
