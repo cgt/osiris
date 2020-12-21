@@ -109,7 +109,7 @@ export function LoginForm(props: { onLogin(data: LoginParams): void; }) {
                         variant="contained"
                         color="primary"
                     >
-                        Sign up
+                        Log in
                     </Button>
                 </Grid>
             </Grid>
