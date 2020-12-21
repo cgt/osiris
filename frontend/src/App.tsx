@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-interface SignUpParams {
+interface LoginParams {
     username: string;
     password: string;
 }
@@ -56,7 +56,7 @@ function reducer(state: SignUpFormState, action: SignUpFormAction): SignUpFormSt
     }
 }
 
-export function LoginForm(props: { onLogin(data: SignUpParams): void; }) {
+export function LoginForm(props: { onLogin(data: LoginParams): void; }) {
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch({type: 'dirty'});
@@ -124,7 +124,7 @@ interface User {
 
 export function App() {
     const [user, setUser] = useState<User | undefined>(undefined);
-    const onSignUp = (data: SignUpParams) => {
+    const onSignUp = (data: LoginParams) => {
         setUser({username: data.username});
     };
     const classes = useStyles();
