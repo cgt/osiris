@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Button, Container, Grid, makeStyles, TextField, Typography } from '@material-ui/core';
+import { Button, Container, Grid, makeStyles, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -67,9 +67,6 @@ export function LoginForm(props: { onLogin(data: LoginParams): void; }) {
     const [state, dispatch] = useReducer(reducer, initialState);
     const classes = useStyles();
     return <>
-        <Typography component="h1" variant="h5">
-            Sign up
-        </Typography>
         <form className={classes.form} noValidate onSubmit={handleOnSubmit} data-testid="login-form">
             <Grid container spacing={2}>
                 <Grid item xs={12}>
