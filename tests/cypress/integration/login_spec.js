@@ -15,7 +15,7 @@ function enterValidUsername() {
 }
 
 function enterValidPassword() {
-    enterPassword('test-password');
+    enterPassword('test');
 }
 
 function enterUsername(username) {
@@ -31,10 +31,10 @@ function submit() {
 }
 
 function showsUserIsLoggedIn() {
-    cy.contains(`Welcome, ${USERNAME}!`);
+    cy.contains(`Welcome, ${USERNAME}! It works!`);
 }
 
-const USERNAME = 'test-user';
+const USERNAME = 'test';
 
 function getByTestId(selector) {
     return cy.get('[data-testid="' + selector + '"]');
