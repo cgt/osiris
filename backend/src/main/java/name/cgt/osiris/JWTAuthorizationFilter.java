@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
-    private final Algorithm secret;
+    private final Algorithm jwtSigner;
 
-    public JWTAuthorizationFilter(Algorithm secret) {
-        this.secret = secret;
+    public JWTAuthorizationFilter(Algorithm jwtSigner) {
+        this.jwtSigner = jwtSigner;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         final var authorizationHeader = request.getHeader("Authorization");
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             final var token = authorizationHeader.replace("Bearer ", "");
-            final var jwt = JWT.require(secret).build();
+            final var jwt = JWT.require(jwtSigner).build();
             final var username = jwt.verify(token).getSubject();
             if (username != null) {
                 final var auth = new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
