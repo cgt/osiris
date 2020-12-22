@@ -58,7 +58,7 @@ public class LoginController {
             this.jwtSigner = jwtSigner;
         }
 
-        private String issueTokenFor(String username) {
+        String issueTokenFor(String username) {
             return JWT
               .create()
               .withSubject(username)
