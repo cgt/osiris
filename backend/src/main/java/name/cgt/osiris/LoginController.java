@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +31,7 @@ public class LoginController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         final var auth = authenticate(request);
 
-        final var username = ((User) auth.getPrincipal()).getUsername();
+        final var username = ((UserDetails) auth.getPrincipal()).getUsername();
         final String token = issueTokenFor(username);
 
         return ResponseEntity.ok(new LoginResponse(token));
