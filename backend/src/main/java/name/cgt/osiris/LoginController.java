@@ -67,6 +67,10 @@ public class LoginController {
         public Applesauce() {
         }
 
+        Applesauce(Algorithm jwtSigner) {
+            this.jwtSigner = jwtSigner;
+        }
+
         private String issueTokenFor(String username) {
             return JWT
               .create()
