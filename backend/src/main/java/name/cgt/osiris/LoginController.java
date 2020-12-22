@@ -49,13 +49,11 @@ public class LoginController {
     }
 
     private String issueTokenFor(String username) {
-        final var token =
-          JWT
-            .create()
-            .withSubject(username)
-            .withExpiresAt(hoursFromNow(1))
-            .sign(jwtSigner);
-        return token;
+        return JWT
+          .create()
+          .withSubject(username)
+          .withExpiresAt(hoursFromNow(1))
+          .sign(jwtSigner);
     }
 
     @SuppressWarnings("UseOfObsoleteDateTimeApi") // The JWT library requires a `Date`.
