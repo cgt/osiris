@@ -31,8 +31,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
       FilterChain chain
     ) throws IOException, ServletException {
         final var authorizationHeader = request.getHeader("Authorization");
-        var auth = Optional.<Authentication>empty();
-        auth = applesauce(authorizationHeader, auth);
+        var auth = applesauce(authorizationHeader, Optional.<Authentication>empty());
         auth.ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
 
         chain.doFilter(request, response);
