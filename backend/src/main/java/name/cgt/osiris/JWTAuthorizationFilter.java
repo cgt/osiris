@@ -40,7 +40,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
                 auth = new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
                 optionalAuth = Optional.of(auth);
             }
-            if (optionalAuth.isPresent() && auth != null) {
+            if (optionalAuth.isPresent()) {
                 SecurityContextHolder.getContext().setAuthentication(optionalAuth.get());
             }
         }
