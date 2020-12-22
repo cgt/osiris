@@ -32,9 +32,9 @@ public class TokenAuthorizerTest {
 
     @Test
     public void token_without_username_is_unauthorized() {
-        final var authorizationHeader = tokenWithoutUsername();
+        final var token = tokenWithoutUsername();
 
-        final var authentication = authorizer.authFromHeader(authorizationHeader);
+        final var authentication = authorizer.authFromHeader(token);
 
         assertThat(authentication).isEmpty();
     }
