@@ -27,7 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
           .antMatchers("/api/login").permitAll()
           .antMatchers("/api/**").authenticated()
           .and()
-          .addFilterAfter(new JWTAuthorizationFilter(Algorithm.HMAC512("DUMMY SECRET")), BasicAuthenticationFilter.class)
+          .addFilterAfter(new JWTAuthorizationFilter(jwtSigningAlgorithm()), BasicAuthenticationFilter.class)
           .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
