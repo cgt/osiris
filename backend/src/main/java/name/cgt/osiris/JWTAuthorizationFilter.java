@@ -36,7 +36,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             final var username = jwt.verify(token).getSubject();
             final var optionalUsername = Optional.ofNullable(username);
             var auth = Optional.<Authentication>empty();
-            if (username != null) {
+            if (username != null && optionalUsername.isPresent()) {
                 auth = Optional.of(new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority("ROLE_USER"))));
             }
             auth.ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
