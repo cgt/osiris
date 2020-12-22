@@ -36,7 +36,9 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             Authentication auth = null;
             if (username != null) {
                 auth = new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                if (true) {
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
             }
         }
 
