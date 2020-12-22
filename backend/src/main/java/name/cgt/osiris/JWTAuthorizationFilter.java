@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
     private final JWTVerifier jwt;
@@ -36,6 +37,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             Authentication auth = null;
             if (username != null) {
                 auth = new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
+                Optional.of(auth);
             }
             if (auth != null) {
                 SecurityContextHolder.getContext().setAuthentication(auth);
