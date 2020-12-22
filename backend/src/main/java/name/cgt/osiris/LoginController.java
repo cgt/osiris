@@ -20,18 +20,18 @@ import java.util.Date;
 @RequestMapping("/api/login")
 public class LoginController {
     private final AuthenticationManager authManager;
-    private final TokenIssuer applesauce;
+    private final TokenIssuer tokenIssuer;
 
     public LoginController(AuthenticationManager authManager, Algorithm jwtSigner) {
         this.authManager = authManager;
-        this.applesauce = new TokenIssuer(jwtSigner);
+        this.tokenIssuer = new TokenIssuer(jwtSigner);
     }
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         final var auth = authenticate(request);
 
-        final String token = applesauce.issueTokenFor(username(auth));
+        final String token = tokenIssuer.issueTokenFor(username(auth));
 
         return ResponseEntity.ok(new LoginResponse(token));
     }
