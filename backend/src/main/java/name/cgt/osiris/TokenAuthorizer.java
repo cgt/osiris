@@ -21,7 +21,7 @@ public class TokenAuthorizer {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             final var token = authorizationHeader.replace("Bearer ", "");
             final var username = Optional.ofNullable(jwt.verify(token).getSubject());
-            auth = username.map(this::authForUser);
+            return username.map(this::authForUser);
         }
         return auth;
     }
