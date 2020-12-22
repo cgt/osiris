@@ -38,8 +38,7 @@ public class TokenAuthorizerTest {
             .withExpiresAt(farInTheFuture())
             .sign(signingAlgorithm);
 
-        final var authorizationHeader = formatBearerToken(validToken);
-        return authorizationHeader;
+        return formatBearerToken(validToken);
     }
 
     private static String formatBearerToken(String validToken) {
