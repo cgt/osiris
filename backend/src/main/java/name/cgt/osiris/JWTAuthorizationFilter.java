@@ -30,9 +30,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         Optional
           .ofNullable(request.getHeader("Authorization"))
           .flatMap(tokenAuthorizer::authFromHeader)
-          .ifPresent(authentication ->
-            setAuthentication(authentication)
-          );
+          .ifPresent(this::setAuthentication);
 
         chain.doFilter(request, response);
     }
