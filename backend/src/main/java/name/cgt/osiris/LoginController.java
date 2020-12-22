@@ -52,7 +52,7 @@ public class LoginController {
     }
 
     public static class Applesauce {
-        private Algorithm jwtSigner;
+        private final Algorithm jwtSigner;
 
         Applesauce(Algorithm jwtSigner) {
             this.jwtSigner = jwtSigner;
