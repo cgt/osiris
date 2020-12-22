@@ -30,6 +30,15 @@ public class TokenAuthorizerTest {
           .hasValueSatisfying(allOf(isAuthenticated(), hasUsername("username")));
     }
 
+    @Test
+    public void token_without_username_is_unauthorized() {
+        final var authorizationHeader = tokenWithoutUsername();
+
+        final var authentication = authorizer.authFromHeader(authorizationHeader);
+
+        assertThat(authentication).isEmpty();
+    }
+
     private String validTokenForUser(String username) {
         final var validToken =
           JWT
@@ -41,19 +50,6 @@ public class TokenAuthorizerTest {
         return formatBearerToken(validToken);
     }
 
-    private static String formatBearerToken(String validToken) {
-        return "Bearer " + validToken;
-    }
-
-    @Test
-    public void token_without_username_is_unauthorized() {
-        final var authorizationHeader = tokenWithoutUsername();
-
-        final var authentication = authorizer.authFromHeader(authorizationHeader);
-
-        assertThat(authentication).isEmpty();
-    }
-
     private String tokenWithoutUsername() {
         final var tokenWithoutUsername =
           JWT
@@ -62,6 +58,10 @@ public class TokenAuthorizerTest {
             .sign(signingAlgorithm);
 
         return formatBearerToken(tokenWithoutUsername);
+    }
+
+    private static String formatBearerToken(String validToken) {
+        return "Bearer " + validToken;
     }
 
     @SuppressWarnings("UseOfObsoleteDateTimeApi")
