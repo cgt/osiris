@@ -18,7 +18,7 @@ public class TokenAuthorizer {
 
     Optional<Authentication> authFromHeader(@Nullable String authorizationHeader) {
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-            return Optional.<Authentication>empty();
+            return Optional.empty();
         }
         final var token = authorizationHeader.replace("Bearer ", "");
         final var username = Optional.ofNullable(jwt.verify(token).getSubject());
