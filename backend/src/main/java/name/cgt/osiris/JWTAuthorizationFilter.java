@@ -34,11 +34,11 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             final var token = authorizationHeader.replace("Bearer ", "");
             final var username = jwt.verify(token).getSubject();
-            var optionalAuth = Optional.<Authentication>empty();
+            var auth = Optional.<Authentication>empty();
             if (username != null) {
-                optionalAuth = Optional.of(new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority("ROLE_USER"))));
+                auth = Optional.of(new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority("ROLE_USER"))));
             }
-            optionalAuth.ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
+            auth.ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
         }
 
         chain.doFilter(request, response);
