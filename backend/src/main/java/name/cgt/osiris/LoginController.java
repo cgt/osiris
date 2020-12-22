@@ -49,7 +49,8 @@ public class LoginController {
     }
 
     private String issueTokenFor(String username) {
-        final var expiresAt = Date.from(Instant.now().plus(Duration.ofHours(1)));
+        final var hours = 1;
+        final var expiresAt = Date.from(Instant.now().plus(Duration.ofHours(hours)));
         final var token =
           JWT
             .create()
