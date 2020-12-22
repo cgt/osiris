@@ -25,7 +25,7 @@ public class LoginController {
 
     public LoginController(AuthenticationManager authManager) {
         this.authManager = authManager;
-        secret = Algorithm.HMAC512("DUMMY SECRET");
+        secret = Algorithm.HMAC512("DUMMY SECRET"); // TODO: use real secret
     }
 
     @PostMapping
@@ -45,7 +45,7 @@ public class LoginController {
             .create()
             .withSubject(username)
             .withExpiresAt(expiresAt)
-            .sign(secret);// TODO: use real secret
+            .sign(secret);
 
         return ResponseEntity.ok(new LoginResponse(token));
     }
