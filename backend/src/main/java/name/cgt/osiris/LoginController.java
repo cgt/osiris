@@ -20,18 +20,18 @@ import java.util.Date;
 @RequestMapping("/api/login")
 public class LoginController {
     private final AuthenticationManager authManager;
-    private Algorithm jwtSigner;
+    private final Applesauce applesauce = new Applesauce();
 
     public LoginController(AuthenticationManager authManager, Algorithm jwtSigner) {
         this.authManager = authManager;
-        this.jwtSigner = jwtSigner;
+        this.applesauce.jwtSigner = jwtSigner;
     }
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         final var auth = authenticate(request);
 
-        final String token = issueTokenFor(username(auth));
+        final String token = applesauce.issueTokenFor(username(auth));
 
         return ResponseEntity.ok(new LoginResponse(token));
     }
@@ -52,15 +52,31 @@ public class LoginController {
     }
 
     private String issueTokenFor(String username) {
-        return JWT
-          .create()
-          .withSubject(username)
-          .withExpiresAt(hoursFromNow(1))
-          .sign(jwtSigner);
+        return applesauce.issueTokenFor(username);
     }
 
     @SuppressWarnings("UseOfObsoleteDateTimeApi") // The JWT library requires a `Date`.
     private Date hoursFromNow(int hours) {
-        return Date.from(Instant.now().plus(Duration.ofHours(hours)));
+        return applesauce.hoursFromNow(hours);
+    }
+
+    public static class Applesauce {
+        private Algorithm jwtSigner;
+
+        public Applesauce() {
+        }
+
+        private String issueTokenFor(String username) {
+            return JWT
+              .create()
+              .withSubject(username)
+              .withExpiresAt(hoursFromNow(1))
+              .sign(jwtSigner);
+        }
+
+        @SuppressWarnings("UseOfObsoleteDateTimeApi") // The JWT library requires a `Date`.
+        private Date hoursFromNow(int hours) {
+            return Date.from(Instant.now().plus(Duration.ofHours(hours)));
+        }
     }
 }
