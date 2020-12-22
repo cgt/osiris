@@ -59,6 +59,7 @@ public class LoginController {
         return token;
     }
 
+    @SuppressWarnings("UseOfObsoleteDateTimeApi") // The JWT library requires a `Date`.
     private Date hoursFromNow(int hours) {
         return Date.from(Instant.now().plus(Duration.ofHours(hours)));
     }
