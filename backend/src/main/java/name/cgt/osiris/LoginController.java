@@ -23,9 +23,9 @@ public class LoginController {
     private final AuthenticationManager authManager;
     private final Algorithm secret;
 
-    public LoginController(AuthenticationManager authManager) {
+    public LoginController(AuthenticationManager authManager, Algorithm secret) {
         this.authManager = authManager;
-        secret = Algorithm.HMAC512("DUMMY SECRET"); // TODO: use real secret
+        this.secret = secret;
     }
 
     @PostMapping
