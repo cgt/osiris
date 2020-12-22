@@ -50,7 +50,8 @@ public class TokenAuthorizerTest {
             .withExpiresAt(farInTheFuture())
             .sign(signingAlgorithm);
 
-        final var authentication = authorizer.authFromHeader("Bearer " + tokenWithoutUsername);
+        final var authorizationHeader = "Bearer " + tokenWithoutUsername;
+        final var authentication = authorizer.authFromHeader(authorizationHeader);
 
         assertThat(authentication).isEmpty();
     }
