@@ -45,7 +45,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 
-    private UsernamePasswordAuthenticationToken authForUser(String u) {
+    private Authentication authForUser(String u) {
         return new UsernamePasswordAuthenticationToken(u, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
     }
 }
