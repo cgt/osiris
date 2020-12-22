@@ -19,10 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
-    private JWTVerifier jwt;
+    private final TokenAuthorizer tokenAuthorizer = new TokenAuthorizer();
 
     public JWTAuthorizationFilter(Algorithm jwtSigner) {
-        jwt = JWT.require(jwtSigner).build();
+        tokenAuthorizer.jwt = JWT.require(jwtSigner).build();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
       FilterChain chain
     ) throws IOException, ServletException {
         final var authorizationHeader = request.getHeader("Authorization");
-        authFromHeader(authorizationHeader)
+        tokenAuthorizer.authFromHeader(authorizationHeader)
           .ifPresent(authentication ->
             SecurityContextHolder.getContext().setAuthentication(authentication)
           );
@@ -41,18 +41,33 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     }
 
     private Optional<Authentication> authFromHeader(@Nullable String authorizationHeader) {
-        var auth = Optional.<Authentication>empty();
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            final var token = authorizationHeader.replace("Bearer ", "");
-            final var username = Optional.ofNullable(jwt.verify(token).getSubject());
-            if (username.isPresent()) {
-                auth = username.map(this::authForUser);
-            }
-        }
-        return auth;
+        return tokenAuthorizer.authFromHeader(authorizationHeader);
     }
 
     private Authentication authForUser(String username) {
-        return new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
+        return tokenAuthorizer.authForUser(username);
+    }
+
+    public static class TokenAuthorizer {
+        private JWTVerifier jwt;
+
+        public TokenAuthorizer() {
+        }
+
+        private Optional<Authentication> authFromHeader(@Nullable String authorizationHeader) {
+            var auth = Optional.<Authentication>empty();
+            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+                final var token = authorizationHeader.replace("Bearer ", "");
+                final var username = Optional.ofNullable(jwt.verify(token).getSubject());
+                if (username.isPresent()) {
+                    auth = username.map(this::authForUser);
+                }
+            }
+            return auth;
+        }
+
+        private Authentication authForUser(String username) {
+            return new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
+        }
     }
 }
