@@ -22,8 +22,9 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     private final TokenAuthorizer tokenAuthorizer;
 
     public JWTAuthorizationFilter(Algorithm jwtSigner) {
+        final var jwt = JWT.require(jwtSigner).build();
         tokenAuthorizer = new TokenAuthorizer();
-        tokenAuthorizer.jwt = JWT.require(jwtSigner).build();
+        tokenAuthorizer.jwt = jwt;
     }
 
     @Override
