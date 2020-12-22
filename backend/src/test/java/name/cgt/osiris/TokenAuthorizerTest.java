@@ -22,10 +22,11 @@ public class TokenAuthorizerTest {
 
     @Test
     public void valid_token_is_authorized() {
+        final var x = "username";
         final var validToken =
           JWT
             .create()
-            .withSubject("username")
+            .withSubject(x)
             .withExpiresAt(farInTheFuture())
             .sign(signingAlgorithm);
 
