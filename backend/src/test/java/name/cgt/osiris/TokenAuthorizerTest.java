@@ -38,8 +38,12 @@ public class TokenAuthorizerTest {
             .withExpiresAt(farInTheFuture())
             .sign(signingAlgorithm);
 
-        final var authorizationHeader = "Bearer " + validToken;
+        final var authorizationHeader = formatBearerToken(validToken);
         return authorizationHeader;
+    }
+
+    private static String formatBearerToken(String validToken) {
+        return "Bearer " + validToken;
     }
 
     @Test
@@ -58,7 +62,7 @@ public class TokenAuthorizerTest {
             .withExpiresAt(farInTheFuture())
             .sign(signingAlgorithm);
 
-        return "Bearer " + tokenWithoutUsername;
+        return formatBearerToken(tokenWithoutUsername);
     }
 
     @SuppressWarnings("UseOfObsoleteDateTimeApi")
