@@ -30,7 +30,8 @@ public class TokenAuthorizerTest {
             .withExpiresAt(farInTheFuture())
             .sign(signingAlgorithm);
 
-        final var authentication = authorizer.authFromHeader("Bearer " + validToken);
+        final var authorizationHeader = "Bearer " + validToken;
+        final var authentication = authorizer.authFromHeader(authorizationHeader);
 
         assertThat(authentication)
           .hasValueSatisfying(allOf(isAuthenticated(), hasUsername("username")));
