@@ -39,6 +39,12 @@ public class LoginController {
         final var auth = authManager.authenticate(requestedAuth);
 
         final var username = ((User) auth.getPrincipal()).getUsername();
+        final String token = issueTokenFor(username);
+
+        return ResponseEntity.ok(new LoginResponse(token));
+    }
+
+    private String issueTokenFor(String username) {
         final var expiresAt = Date.from(Instant.now().plus(Duration.ofHours(1)));
         final var token =
           JWT
@@ -46,7 +52,6 @@ public class LoginController {
             .withSubject(username)
             .withExpiresAt(expiresAt)
             .sign(jwtSigner);
-
-        return ResponseEntity.ok(new LoginResponse(token));
+        return token;
     }
 }
