@@ -46,6 +46,7 @@ public class LoginController {
           request.getUsername(),
           request.getPassword()
         );
+        assert !auth.isAuthenticated();
         return auth;
     }
 
