@@ -37,11 +37,15 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             var auth = Optional.<Authentication>empty();
             if (username.isPresent()) {
                 final var u = username.get();
-                auth = Optional.of(new UsernamePasswordAuthenticationToken(u, null, List.of(new SimpleGrantedAuthority("ROLE_USER"))));
+                auth = Optional.of(authForUser(u));
             }
             auth.ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
         }
 
         chain.doFilter(request, response);
+    }
+
+    private UsernamePasswordAuthenticationToken authForUser(String u) {
+        return new UsernamePasswordAuthenticationToken(u, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
     }
 }
