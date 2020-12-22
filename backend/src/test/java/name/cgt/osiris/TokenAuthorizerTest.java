@@ -39,6 +39,13 @@ public class TokenAuthorizerTest {
         assertThat(authentication).isEmpty();
     }
 
+    @Test
+    public void null_token_is_unauthorized() {
+        final var authentication = authorizer.authFromHeader(null);
+
+        assertThat(authentication).isEmpty();
+    }
+
     private String validTokenForUser(String username) {
         final var token =
           JWT
