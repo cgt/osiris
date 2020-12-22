@@ -20,7 +20,7 @@ import java.util.Date;
 @RequestMapping("/api/login")
 public class LoginController {
     private final AuthenticationManager authManager;
-    private Applesauce applesauce;
+    private final Applesauce applesauce;
 
     public LoginController(AuthenticationManager authManager, Algorithm jwtSigner) {
         this.authManager = authManager;
