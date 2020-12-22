@@ -24,6 +24,7 @@ public class LoginController {
 
     public LoginController(AuthenticationManager authManager, Algorithm jwtSigner) {
         this.authManager = authManager;
+        this.applesauce = new Applesauce();
         this.applesauce.jwtSigner = jwtSigner;
     }
 
