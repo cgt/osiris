@@ -39,7 +39,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     }
 
     private Optional<Authentication> applesauce(@Nullable String authorizationHeader) {
-        Optional<Authentication> auth = Optional.<Authentication>empty();
+        var auth = Optional.<Authentication>empty();
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             final var token = authorizationHeader.replace("Bearer ", "");
             final var username = Optional.ofNullable(jwt.verify(token).getSubject());
