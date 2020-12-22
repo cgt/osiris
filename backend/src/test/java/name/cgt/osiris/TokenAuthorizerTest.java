@@ -46,6 +46,15 @@ public class TokenAuthorizerTest {
         assertThat(authentication).isEmpty();
     }
 
+    @Test
+    public void token_without_Bearer_prefix_is_unauthorized() {
+        final var improperlyFormattedToken = "improper token prefix" + validTokenForUser("username");
+
+        final var authentication = authorizer.authFromHeader(improperlyFormattedToken);
+
+        assertThat(authentication).isEmpty();
+    }
+
     private String validTokenForUser(String username) {
         final var token =
           JWT
