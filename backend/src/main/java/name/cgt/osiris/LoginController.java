@@ -51,10 +51,6 @@ public class LoginController {
         );
     }
 
-    private String issueTokenFor(String username) {
-        return applesauce.issueTokenFor(username);
-    }
-
     @SuppressWarnings("UseOfObsoleteDateTimeApi") // The JWT library requires a `Date`.
     private Date hoursFromNow(int hours) {
         return applesauce.hoursFromNow(hours);
