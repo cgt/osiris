@@ -31,10 +31,10 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
       FilterChain chain
     ) throws IOException, ServletException {
         final var authorizationHeader = request.getHeader("Authorization");
+        var auth = Optional.<Authentication>empty();
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             final var token = authorizationHeader.replace("Bearer ", "");
             final var username = Optional.ofNullable(jwt.verify(token).getSubject());
-            var auth = Optional.<Authentication>empty();
             if (username.isPresent()) {
                 auth = username.map(this::authForUser);
             }
