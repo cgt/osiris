@@ -43,9 +43,10 @@ public class TokenAuthorizerTest {
 
     @Test
     public void null_token_is_unauthorized() {
-        final var authentication = authorizer.authFromHeader(null);
-
-        assertThat(authentication).isEmpty();
+        assertThrows(
+          NullPointerException.class,
+          () -> authorizer.authFromHeader(null)
+        );
     }
 
     @Test

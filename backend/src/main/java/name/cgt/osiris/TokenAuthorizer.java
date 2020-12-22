@@ -16,7 +16,7 @@ public class TokenAuthorizer {
     }
 
     Optional<Authentication> authFromHeader(String authorizationHeader) {
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+        if (!authorizationHeader.startsWith("Bearer ")) {
             return Optional.empty();
         }
         final var token = authorizationHeader.replace("Bearer ", "");
