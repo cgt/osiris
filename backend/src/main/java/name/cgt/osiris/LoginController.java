@@ -54,9 +54,6 @@ public class LoginController {
     public static class Applesauce {
         private Algorithm jwtSigner;
 
-        public Applesauce() {
-        }
-
         Applesauce(Algorithm jwtSigner) {
             this.jwtSigner = jwtSigner;
         }
