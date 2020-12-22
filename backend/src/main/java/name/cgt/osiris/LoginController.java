@@ -29,12 +29,16 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-        final var auth = authManager.authenticate(authenticationFrom(request));
+        final var auth = authenticate(request);
 
         final var username = ((User) auth.getPrincipal()).getUsername();
         final String token = issueTokenFor(username);
 
         return ResponseEntity.ok(new LoginResponse(token));
+    }
+
+    private Authentication authenticate(LoginRequest request) {
+        return authManager.authenticate(authenticationFrom(request));
     }
 
     private Authentication authenticationFrom(LoginRequest request) {
