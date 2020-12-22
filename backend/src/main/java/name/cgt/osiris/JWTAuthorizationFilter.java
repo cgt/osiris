@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
     private final TokenAuthorizer tokenAuthorizer;
@@ -25,8 +26,9 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
       HttpServletResponse response,
       FilterChain chain
     ) throws IOException, ServletException {
-        final var authorizationHeader = request.getHeader("Authorization");
-        tokenAuthorizer.authFromHeader(authorizationHeader)
+        Optional
+          .ofNullable(request.getHeader("Authorization"))
+          .flatMap(tokenAuthorizer::authFromHeader)
           .ifPresent(authentication ->
             SecurityContextHolder.getContext().setAuthentication(authentication)
           );
