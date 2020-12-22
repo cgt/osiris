@@ -3,6 +3,7 @@ package name.cgt.osiris;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,7 +38,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 
-    private Optional<Authentication> applesauce(String authorizationHeader) {
+    private Optional<Authentication> applesauce(@Nullable String authorizationHeader) {
         Optional<Authentication> auth = Optional.<Authentication>empty();
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             final var token = authorizationHeader.replace("Bearer ", "");
