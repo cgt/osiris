@@ -23,6 +23,8 @@ public class TokenAuthorizer {
             final var username = Optional.ofNullable(jwt.verify(token).getSubject());
             if (username.isPresent()) {
                 auth = username.map(this::authForUser);
+            } else {
+                auth = username.map(this::authForUser);
             }
         }
         return auth;
