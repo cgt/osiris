@@ -32,6 +32,13 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     ) throws IOException, ServletException {
         final var authorizationHeader = request.getHeader("Authorization");
         var auth = Optional.<Authentication>empty();
+        auth = applesauce(authorizationHeader, auth);
+        auth.ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
+
+        chain.doFilter(request, response);
+    }
+
+    private Optional<Authentication> applesauce(String authorizationHeader, Optional<Authentication> auth) {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             final var token = authorizationHeader.replace("Bearer ", "");
             final var username = Optional.ofNullable(jwt.verify(token).getSubject());
@@ -39,9 +46,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
                 auth = username.map(this::authForUser);
             }
         }
-        auth.ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
-
-        chain.doFilter(request, response);
+        return auth;
     }
 
     private Authentication authForUser(String username) {
