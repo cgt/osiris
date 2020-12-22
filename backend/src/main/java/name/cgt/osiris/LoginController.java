@@ -31,10 +31,14 @@ public class LoginController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         final var auth = authenticate(request);
 
-        final var username = ((UserDetails) auth.getPrincipal()).getUsername();
+        final var username = username(auth);
         final String token = issueTokenFor(username);
 
         return ResponseEntity.ok(new LoginResponse(token));
+    }
+
+    private String username(Authentication auth) {
+        return ((UserDetails) auth.getPrincipal()).getUsername();
     }
 
     private Authentication authenticate(LoginRequest request) {
