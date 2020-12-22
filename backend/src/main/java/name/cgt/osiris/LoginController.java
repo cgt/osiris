@@ -42,10 +42,11 @@ public class LoginController {
     }
 
     private Authentication authenticationFrom(LoginRequest request) {
-        return new UsernamePasswordAuthenticationToken(
+        final var auth = new UsernamePasswordAuthenticationToken(
           request.getUsername(),
           request.getPassword()
         );
+        return auth;
     }
 
     private String issueTokenFor(String username) {
