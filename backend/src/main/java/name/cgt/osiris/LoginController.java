@@ -49,12 +49,11 @@ public class LoginController {
     }
 
     private String issueTokenFor(String username) {
-        final var expiresAt = hoursFromNow(1);
         final var token =
           JWT
             .create()
             .withSubject(username)
-            .withExpiresAt(expiresAt)
+            .withExpiresAt(hoursFromNow(1))
             .sign(jwtSigner);
         return token;
     }
