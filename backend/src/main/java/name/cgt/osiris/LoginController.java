@@ -21,9 +21,11 @@ import java.util.List;
 @RequestMapping("/api/login")
 public class LoginController {
     private final AuthenticationManager authManager;
+    private final Algorithm secret;
 
     public LoginController(AuthenticationManager authManager) {
         this.authManager = authManager;
+        secret = Algorithm.HMAC512("DUMMY SECRET");
     }
 
     @PostMapping
@@ -43,7 +45,7 @@ public class LoginController {
             .create()
             .withSubject(username)
             .withExpiresAt(expiresAt)
-            .sign(Algorithm.HMAC512("DUMMY SECRET"));// TODO: use real secret
+            .sign(secret);// TODO: use real secret
 
         return ResponseEntity.ok(new LoginResponse(token));
     }
