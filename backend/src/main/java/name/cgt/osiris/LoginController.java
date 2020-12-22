@@ -31,8 +31,7 @@ public class LoginController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         final var auth = authenticate(request);
 
-        final var username = username(auth);
-        final String token = issueTokenFor(username);
+        final String token = issueTokenFor(username(auth));
 
         return ResponseEntity.ok(new LoginResponse(token));
     }
