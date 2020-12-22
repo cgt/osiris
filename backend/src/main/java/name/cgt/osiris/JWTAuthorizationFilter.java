@@ -46,6 +46,10 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         public TokenAuthorizer() {
         }
 
+        TokenAuthorizer(JWTVerifier jwt) {
+            this.jwt = jwt;
+        }
+
         private Optional<Authentication> authFromHeader(@Nullable String authorizationHeader) {
             var auth = Optional.<Authentication>empty();
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
