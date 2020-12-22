@@ -1,6 +1,5 @@
 package name.cgt.osiris;
 
-import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,9 +16,9 @@ public class LoginController {
     private final AuthenticationManager authManager;
     private final TokenIssuer tokenIssuer;
 
-    public LoginController(AuthenticationManager authManager, Algorithm jwtSigner) {
+    public LoginController(AuthenticationManager authManager, TokenIssuer tokenIssuer) {
         this.authManager = authManager;
-        this.tokenIssuer = new TokenIssuer(jwtSigner);
+        this.tokenIssuer = tokenIssuer;
     }
 
     @PostMapping
