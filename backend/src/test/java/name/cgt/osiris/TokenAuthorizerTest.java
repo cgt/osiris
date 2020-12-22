@@ -51,13 +51,13 @@ public class TokenAuthorizerTest {
     }
 
     private String tokenWithoutUsername() {
-        final var tokenWithoutUsername =
+        final var token =
           JWT
             .create()
             .withExpiresAt(farInTheFuture())
             .sign(signingAlgorithm);
 
-        return formatBearerToken(tokenWithoutUsername);
+        return formatBearerToken(token);
     }
 
     private static String formatBearerToken(String validToken) {
