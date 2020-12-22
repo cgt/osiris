@@ -51,11 +51,6 @@ public class LoginController {
         );
     }
 
-    @SuppressWarnings("UseOfObsoleteDateTimeApi") // The JWT library requires a `Date`.
-    private Date hoursFromNow(int hours) {
-        return applesauce.hoursFromNow(hours);
-    }
-
     public static class Applesauce {
         private Algorithm jwtSigner;
 
