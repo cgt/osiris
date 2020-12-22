@@ -23,6 +23,14 @@ public class TokenAuthorizerTest {
     @Test
     public void valid_token_is_authorized() {
         final var x = "username";
+        final var authorizationHeader = validTokenForUser(x);
+        final var authentication = authorizer.authFromHeader(authorizationHeader);
+
+        assertThat(authentication)
+          .hasValueSatisfying(allOf(isAuthenticated(), hasUsername("username")));
+    }
+
+    private String validTokenForUser(String x) {
         final var validToken =
           JWT
             .create()
@@ -31,10 +39,7 @@ public class TokenAuthorizerTest {
             .sign(signingAlgorithm);
 
         final var authorizationHeader = "Bearer " + validToken;
-        final var authentication = authorizer.authFromHeader(authorizationHeader);
-
-        assertThat(authentication)
-          .hasValueSatisfying(allOf(isAuthenticated(), hasUsername("username")));
+        return authorizationHeader;
     }
 
     @Test
