@@ -21,11 +21,11 @@ import java.util.List;
 @RequestMapping("/api/login")
 public class LoginController {
     private final AuthenticationManager authManager;
-    private final Algorithm secret;
+    private final Algorithm jwtSigner;
 
-    public LoginController(AuthenticationManager authManager, Algorithm secret) {
+    public LoginController(AuthenticationManager authManager, Algorithm jwtSigner) {
         this.authManager = authManager;
-        this.secret = secret;
+        this.jwtSigner = jwtSigner;
     }
 
     @PostMapping
@@ -45,7 +45,7 @@ public class LoginController {
             .create()
             .withSubject(username)
             .withExpiresAt(expiresAt)
-            .sign(secret);
+            .sign(jwtSigner);
 
         return ResponseEntity.ok(new LoginResponse(token));
     }
