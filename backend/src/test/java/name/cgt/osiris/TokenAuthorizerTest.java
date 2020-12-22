@@ -22,8 +22,7 @@ public class TokenAuthorizerTest {
 
     @Test
     public void valid_token_is_authorized() {
-        final var x = "username";
-        final var authorizationHeader = validTokenForUser(x);
+        final var authorizationHeader = validTokenForUser("username");
         final var authentication = authorizer.authFromHeader(authorizationHeader);
 
         assertThat(authentication)
