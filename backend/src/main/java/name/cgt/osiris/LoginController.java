@@ -39,12 +39,10 @@ public class LoginController {
     }
 
     private Authentication authenticationFrom(LoginRequest request) {
-        final Authentication requestedAuth =
-          new UsernamePasswordAuthenticationToken(
-            request.getUsername(),
-            request.getPassword()
-          );
-        return requestedAuth;
+        return new UsernamePasswordAuthenticationToken(
+          request.getUsername(),
+          request.getPassword()
+        );
     }
 
     private String issueTokenFor(String username) {
