@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-        final UsernamePasswordAuthenticationToken requestedAuth =
+        final Authentication requestedAuth =
           new UsernamePasswordAuthenticationToken(
             request.getUsername(),
             request.getPassword(),
