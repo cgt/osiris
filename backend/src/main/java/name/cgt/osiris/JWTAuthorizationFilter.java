@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
-    private final JWTVerifier jwt;
+    private JWTVerifier jwt;
 
     public JWTAuthorizationFilter(Algorithm jwtSigner) {
         jwt = JWT.require(jwtSigner).build();
