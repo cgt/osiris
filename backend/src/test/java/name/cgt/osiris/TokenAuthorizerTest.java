@@ -30,11 +30,11 @@ public class TokenAuthorizerTest {
           .hasValueSatisfying(allOf(isAuthenticated(), hasUsername("username")));
     }
 
-    private String validTokenForUser(String x) {
+    private String validTokenForUser(String username) {
         final var validToken =
           JWT
             .create()
-            .withSubject(x)
+            .withSubject(username)
             .withExpiresAt(farInTheFuture())
             .sign(signingAlgorithm);
 
