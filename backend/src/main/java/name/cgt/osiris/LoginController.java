@@ -30,7 +30,7 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-        final var requestedAuth =
+        final UsernamePasswordAuthenticationToken requestedAuth =
           new UsernamePasswordAuthenticationToken(
             request.getUsername(),
             request.getPassword(),
