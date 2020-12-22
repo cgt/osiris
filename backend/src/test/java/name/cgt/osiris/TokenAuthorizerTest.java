@@ -42,14 +42,6 @@ public class TokenAuthorizerTest {
     }
 
     @Test
-    public void null_token_is_unauthorized() {
-        assertThrows(
-          NullPointerException.class,
-          () -> authorizer.authFromHeader(null)
-        );
-    }
-
-    @Test
     public void token_without_Bearer_prefix_is_unauthorized() {
         final var improperlyFormattedToken = "improper token prefix" + validTokenForUser("username");
 
