@@ -3,6 +3,7 @@ package name.cgt.osiris;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.Authentication;
@@ -13,6 +14,7 @@ import java.util.Date;
 
 import static org.assertj.core.api.Assertions.allOf;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TokenAuthorizerTest {
 
@@ -55,6 +57,14 @@ public class TokenAuthorizerTest {
         assertThat(authentication).isEmpty();
     }
 
+    @Test
+    public void expired_token_is_unauthorized() {
+        assertThrows(
+          TokenExpiredException.class,
+          () -> authorizer.authFromHeader(expiredToken())
+        );
+    }
+
     private String validTokenForUser(String username) {
         final var token =
           JWT
@@ -76,8 +86,24 @@ public class TokenAuthorizerTest {
         return formatBearerToken(token);
     }
 
+    private String expiredToken() {
+        final var token =
+          JWT
+            .create()
+            .withSubject("username")
+            .withExpiresAt(yesterday())
+            .sign(signingAlgorithm);
+
+        return formatBearerToken(token);
+    }
+
     private static String formatBearerToken(String validToken) {
         return "Bearer " + validToken;
+    }
+
+    @SuppressWarnings("UseOfObsoleteDateTimeApi")
+    private static Date yesterday() {
+        return Date.from(Instant.now().minus(Duration.ofDays(1)));
     }
 
     @SuppressWarnings("UseOfObsoleteDateTimeApi")
