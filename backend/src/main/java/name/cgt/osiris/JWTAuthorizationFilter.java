@@ -42,7 +42,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     }
 
     public static class TokenAuthorizer {
-        private JWTVerifier jwt;
+        private final JWTVerifier jwt;
 
         TokenAuthorizer(JWTVerifier jwt) {
             this.jwt = jwt;
