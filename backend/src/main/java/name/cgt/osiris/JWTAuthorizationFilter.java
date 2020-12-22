@@ -32,7 +32,10 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
       FilterChain chain
     ) throws IOException, ServletException {
         final var authorizationHeader = request.getHeader("Authorization");
-        authFromHeader(authorizationHeader).ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
+        authFromHeader(authorizationHeader)
+          .ifPresent(authentication ->
+            SecurityContextHolder.getContext().setAuthentication(authentication)
+          );
 
         chain.doFilter(request, response);
     }
