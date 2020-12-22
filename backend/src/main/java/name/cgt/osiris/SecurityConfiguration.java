@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -25,7 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
           .antMatchers("/api/login").permitAll()
           .antMatchers("/api/**").authenticated()
           .and()
-          .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+          .addFilterAfter(new JWTAuthorizationFilter(), BasicAuthenticationFilter.class)
           .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
