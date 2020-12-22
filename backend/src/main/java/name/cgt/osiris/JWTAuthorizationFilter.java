@@ -2,6 +2,7 @@ package name.cgt.osiris;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -30,9 +31,13 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
           .ofNullable(request.getHeader("Authorization"))
           .flatMap(tokenAuthorizer::authFromHeader)
           .ifPresent(authentication ->
-            SecurityContextHolder.getContext().setAuthentication(authentication)
+            setAuthentication(authentication)
           );
 
         chain.doFilter(request, response);
+    }
+
+    private void setAuthentication(Authentication authentication) {
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }
