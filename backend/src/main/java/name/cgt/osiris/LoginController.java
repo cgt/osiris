@@ -36,12 +36,12 @@ public class LoginController {
         return ResponseEntity.ok(new LoginResponse(token));
     }
 
-    private String username(Authentication auth) {
-        return ((UserDetails) auth.getPrincipal()).getUsername();
-    }
-
     private Authentication authenticate(LoginRequest request) {
         return authManager.authenticate(authenticationFrom(request));
+    }
+
+    private String username(Authentication auth) {
+        return ((UserDetails) auth.getPrincipal()).getUsername();
     }
 
     private Authentication authenticationFrom(LoginRequest request) {
