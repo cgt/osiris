@@ -25,6 +25,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
             chain.doFilter(request, response);
             return;
+        } else {
         }
         final var token = authorizationHeader.replace("Bearer ", "");
         final var jwt = JWT.require(Algorithm.HMAC512("DUMMY SECRET")).build();
