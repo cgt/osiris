@@ -31,13 +31,14 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
       FilterChain chain
     ) throws IOException, ServletException {
         final var authorizationHeader = request.getHeader("Authorization");
-        var auth = applesauce(authorizationHeader, Optional.<Authentication>empty());
+        var auth = applesauce(authorizationHeader);
         auth.ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
 
         chain.doFilter(request, response);
     }
 
-    private Optional<Authentication> applesauce(String authorizationHeader, Optional<Authentication> auth) {
+    private Optional<Authentication> applesauce(String authorizationHeader) {
+        Optional<Authentication> auth = Optional.<Authentication>empty();
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             final var token = authorizationHeader.replace("Bearer ", "");
             final var username = Optional.ofNullable(jwt.verify(token).getSubject());
