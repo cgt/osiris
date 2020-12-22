@@ -26,13 +26,13 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
             return;
         } else {
-        }
-        final var token = authorizationHeader.replace("Bearer ", "");
-        final var jwt = JWT.require(Algorithm.HMAC512("DUMMY SECRET")).build();
-        final var username = jwt.verify(token).getSubject();
-        if (username != null) {
-            final var auth = new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
-            SecurityContextHolder.getContext().setAuthentication(auth);
+            final var token = authorizationHeader.replace("Bearer ", "");
+            final var jwt = JWT.require(Algorithm.HMAC512("DUMMY SECRET")).build();
+            final var username = jwt.verify(token).getSubject();
+            if (username != null) {
+                final var auth = new UsernamePasswordAuthenticationToken(username, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
         }
 
         chain.doFilter(request, response);
