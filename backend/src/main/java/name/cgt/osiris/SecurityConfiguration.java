@@ -45,6 +45,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public Algorithm jwtSigningAlgorithm() {
-        return Algorithm.HMAC512("DUMMY SECRET");
+        return Algorithm.HMAC512("DUMMY SECRET"); // TODO: Externalize secret.
     }
 }
