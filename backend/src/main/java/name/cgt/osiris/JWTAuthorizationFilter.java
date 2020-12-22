@@ -40,10 +40,6 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 
-    private Authentication authForUser(String username) {
-        return tokenAuthorizer.authForUser(username);
-    }
-
     public static class TokenAuthorizer {
         private JWTVerifier jwt;
 
