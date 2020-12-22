@@ -17,8 +17,8 @@ import java.util.List;
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
     private final Algorithm secret;
 
-    public JWTAuthorizationFilter() {
-        secret = Algorithm.HMAC512("DUMMY SECRET");
+    public JWTAuthorizationFilter(Algorithm secret) {
+        this.secret = secret;
     }
 
     @Override
