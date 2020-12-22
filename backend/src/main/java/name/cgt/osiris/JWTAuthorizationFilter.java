@@ -41,7 +41,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
                 optionalAuth = Optional.of(auth);
             }
             if (auth != null && optionalAuth.isPresent()) {
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                SecurityContextHolder.getContext().setAuthentication(optionalAuth.get());
             }
         }
 
