@@ -38,8 +38,8 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             if (username.isPresent()) {
                 auth = username.map(this::authForUser);
             }
-            auth.ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
         }
+        auth.ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
 
         chain.doFilter(request, response);
     }
