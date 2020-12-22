@@ -29,8 +29,7 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-        final Authentication requestedAuth = authenticationFrom(request);
-        final var auth = authManager.authenticate(requestedAuth);
+        final var auth = authManager.authenticate(authenticationFrom(request));
 
         final var username = ((User) auth.getPrincipal()).getUsername();
         final String token = issueTokenFor(username);
