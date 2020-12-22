@@ -20,11 +20,11 @@ import java.util.Date;
 @RequestMapping("/api/login")
 public class LoginController {
     private final AuthenticationManager authManager;
-    private final Applesauce applesauce;
+    private final TokenIssuer applesauce;
 
     public LoginController(AuthenticationManager authManager, Algorithm jwtSigner) {
         this.authManager = authManager;
-        this.applesauce = new Applesauce(jwtSigner);
+        this.applesauce = new TokenIssuer(jwtSigner);
     }
 
     @PostMapping
@@ -51,10 +51,10 @@ public class LoginController {
         );
     }
 
-    public static class Applesauce {
+    public static class TokenIssuer {
         private final Algorithm jwtSigner;
 
-        Applesauce(Algorithm jwtSigner) {
+        TokenIssuer(Algorithm jwtSigner) {
             this.jwtSigner = jwtSigner;
         }
 
