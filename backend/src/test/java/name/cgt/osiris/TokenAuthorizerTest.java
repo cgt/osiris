@@ -3,15 +3,15 @@ package name.cgt.osiris;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.Authentication;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
-import java.util.List;
 
+import static org.assertj.core.api.Assertions.allOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TokenAuthorizerTest {
@@ -32,7 +32,7 @@ public class TokenAuthorizerTest {
         final var authentication = authorizer.authFromHeader("Bearer " + validToken);
 
         assertThat(authentication)
-          .hasValue(new UsernamePasswordAuthenticationToken("username", null, List.of(new SimpleGrantedAuthority("ROLE_USER"))));
+          .hasValueSatisfying(allOf(isAuthenticated(), hasUsername("username")));
     }
 
     @Test
@@ -51,5 +51,16 @@ public class TokenAuthorizerTest {
     @SuppressWarnings("UseOfObsoleteDateTimeApi")
     private static Date farInTheFuture() {
         return Date.from(Instant.now().plus(Duration.ofDays(1000)));
+    }
+
+    private static Condition<Authentication> isAuthenticated() {
+        return new Condition<>(Authentication::isAuthenticated, "is authenticated");
+    }
+
+    private static Condition<Authentication> hasUsername(String username) {
+        return new Condition<>(
+          auth -> username.equals(auth.getPrincipal()),
+          "has username \"%s\"", username
+        );
     }
 }
