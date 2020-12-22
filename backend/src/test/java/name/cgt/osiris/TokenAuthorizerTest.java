@@ -44,16 +44,21 @@ public class TokenAuthorizerTest {
 
     @Test
     public void token_without_username_is_unauthorized() {
+        final var authorizationHeader = tokenWithoutUsername();
+
+        final var authentication = authorizer.authFromHeader(authorizationHeader);
+
+        assertThat(authentication).isEmpty();
+    }
+
+    private String tokenWithoutUsername() {
         final var tokenWithoutUsername =
           JWT
             .create()
             .withExpiresAt(farInTheFuture())
             .sign(signingAlgorithm);
 
-        final var authorizationHeader = "Bearer " + tokenWithoutUsername;
-        final var authentication = authorizer.authFromHeader(authorizationHeader);
-
-        assertThat(authentication).isEmpty();
+        return "Bearer " + tokenWithoutUsername;
     }
 
     @SuppressWarnings("UseOfObsoleteDateTimeApi")
