@@ -40,10 +40,6 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 
-    private Optional<Authentication> authFromHeader(@Nullable String authorizationHeader) {
-        return tokenAuthorizer.authFromHeader(authorizationHeader);
-    }
-
     private Authentication authForUser(String username) {
         return tokenAuthorizer.authForUser(username);
     }
