@@ -40,14 +40,14 @@ public class TokenAuthorizerTest {
     }
 
     private String validTokenForUser(String username) {
-        final var validToken =
+        final var token =
           JWT
             .create()
             .withSubject(username)
             .withExpiresAt(farInTheFuture())
             .sign(signingAlgorithm);
 
-        return formatBearerToken(validToken);
+        return formatBearerToken(token);
     }
 
     private String tokenWithoutUsername() {
