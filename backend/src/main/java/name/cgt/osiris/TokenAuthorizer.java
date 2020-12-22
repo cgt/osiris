@@ -18,12 +18,12 @@ public class TokenAuthorizer {
 
     Optional<Authentication> authFromHeader(@Nullable String authorizationHeader) {
         var auth = Optional.<Authentication>empty();
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            final var token = authorizationHeader.replace("Bearer ", "");
-            final var username = Optional.ofNullable(jwt.verify(token).getSubject());
-            return username.map(this::authForUser);
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            return auth;
         }
-        return auth;
+        final var token = authorizationHeader.replace("Bearer ", "");
+        final var username = Optional.ofNullable(jwt.verify(token).getSubject());
+        return username.map(this::authForUser);
     }
 
     private Authentication authForUser(String username) {
