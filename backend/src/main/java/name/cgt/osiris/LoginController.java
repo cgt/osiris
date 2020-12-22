@@ -51,7 +51,7 @@ public class LoginController {
         );
     }
 
-    public static class TokenIssuer {
+    static class TokenIssuer {
         private final Algorithm jwtSigner;
 
         TokenIssuer(Algorithm jwtSigner) {
