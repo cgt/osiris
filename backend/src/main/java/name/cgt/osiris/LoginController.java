@@ -31,18 +31,23 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-        final Authentication requestedAuth =
-          new UsernamePasswordAuthenticationToken(
-            request.getUsername(),
-            request.getPassword(),
-            List.of(new SimpleGrantedAuthority("ROLE_USER"))
-          );
+        final Authentication requestedAuth = authenticationFrom(request);
         final var auth = authManager.authenticate(requestedAuth);
 
         final var username = ((User) auth.getPrincipal()).getUsername();
         final String token = issueTokenFor(username);
 
         return ResponseEntity.ok(new LoginResponse(token));
+    }
+
+    private Authentication authenticationFrom(LoginRequest request) {
+        final Authentication requestedAuth =
+          new UsernamePasswordAuthenticationToken(
+            request.getUsername(),
+            request.getPassword(),
+            List.of(new SimpleGrantedAuthority("ROLE_USER"))
+          );
+        return requestedAuth;
     }
 
     private String issueTokenFor(String username) {
