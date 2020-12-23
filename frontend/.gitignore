@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/pact/logs
 
 # production
 /build

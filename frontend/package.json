@@ -13,6 +13,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.6",
     "fontsource-roboto": "^3.1.5",
+    "isomorphic-fetch": "^3.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
@@ -44,5 +45,12 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "config": {
+    "pact_do_not_track": true
+  },
+  "devDependencies": {
+    "@pact-foundation/pact": "^9.13.0",
+    "jest-pact": "^0.8.1"
+  }
 }
