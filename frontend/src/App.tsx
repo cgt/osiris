@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Container, makeStyles } from '@material-ui/core';
 import { LoginForm, LoginParams } from './LoginForm';
+import { Service } from './Service';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -17,23 +18,17 @@ interface User {
 }
 
 export function App() {
+    const service = new Service('');
     const [user, setUser] = useState<User | undefined>(undefined);
     const [token, setToken] = useState<string | undefined>(undefined);
     const [backendMessage, setBackendMessage] = useState<string>('Connecting to backend…');
     const onLogin = async (data: LoginParams) => {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data),
-        });
-        if (response.ok) {
+        try {
+            const {token} = await service.login(data);
             setUser({username: data.username});
-            const responseBody = await response.json();
-            setToken(responseBody.token);
-        } else {
-            alert(`Something evil happened: ${response.status} ${response.statusText}`);
+            setToken(token);
+        } catch (e) {
+            alert(e);
         }
     };
     useEffect(() => {
