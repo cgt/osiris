@@ -14,11 +14,11 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
-    private final TokenAuthorizer tokenAuthorizer;
+    private final TokenAuthenticator tokenAuthorizer;
 
     public JWTAuthorizationFilter(Algorithm jwtSigner) {
         final var jwt = JWT.require(jwtSigner).build();
-        tokenAuthorizer = new TokenAuthorizer(jwt);
+        tokenAuthorizer = new TokenAuthenticator(jwt);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class TokenAuthorizerTest {
 
     private final Algorithm signingAlgorithm = Algorithm.none();
     private final JWTVerifier jwtVerifier = JWT.require(signingAlgorithm).build();
-    private final TokenAuthorizer authorizer = new TokenAuthorizer(jwtVerifier);
+    private final TokenAuthenticator authorizer = new TokenAuthenticator(jwtVerifier);
 
     @Test
     public void valid_token_is_authorized() {

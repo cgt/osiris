@@ -8,10 +8,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.List;
 import java.util.Optional;
 
-public class TokenAuthorizer {
+public class TokenAuthenticator {
     private final JWTVerifier jwt;
 
-    TokenAuthorizer(JWTVerifier jwt) {
+    TokenAuthenticator(JWTVerifier jwt) {
         this.jwt = jwt;
     }
 
