@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.allOf;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TokenAuthorizerTest {
+public class TokenAuthenticatorTest {
 
     private final Algorithm signingAlgorithm = Algorithm.none();
     private final JWTVerifier jwtVerifier = JWT.require(signingAlgorithm).build();
